@@ -136,6 +136,13 @@ body {
         }
     }
 
+    .itemsWrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: auto;
+    }
+
     .items {
         flex: 1;
         overflow: auto;
@@ -244,5 +251,40 @@ body {
 
     &:active {
         background-color: darken(#9dd558, 5%);
+    }
+}
+
+.emptyCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+
+    p {
+        font-size: 16px;
+        color: #999999;
+        margin-top: 9px;
+    }
+
+    .greenButton {
+        width: 245px;
+        margin-top: 40px;
+        position: relative;
+
+        img {
+            transform: rotate(180deg);
+            position: absolute;
+            left: 25px;
+            top: 20px;
+            transition: transform 0.15s ease-in-out;
+        }
+
+        &:hover {
+            img {
+                transform: rotate(180deg) translateX(5px);
+            }
+        }
     }
 }
