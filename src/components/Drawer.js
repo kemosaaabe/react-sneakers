@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 function Drawer({ onClose, onRemove, items = [] }) {
     return (
         <div className="overlay">

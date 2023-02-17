@@ -26,6 +26,11 @@ body {
     align-items: center;
     padding: 40px;
 
+    &LogoLink {
+        text-decoration: none;
+        color: inherit;
+    }
+
     &Left {
         display: flex;
         align-items: center;
@@ -55,12 +60,15 @@ body {
         display: flex;
 
         li:nth-child(1) {
-            margin-right: 30px;
-            cursor: pointer;
-
             img {
                 margin-right: 10px;
             }
+        }
+
+        li:nth-child(1),
+        li:nth-child(2) {
+            margin-right: 30px;
+            cursor: pointer;
         }
     }
 }
