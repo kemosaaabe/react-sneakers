@@ -12,25 +12,43 @@ function App() {
     const [favorites, setFavorites] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [cartOpened, setCartOpened] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axios
-            .get('https://63d9058a5a330a6ae172e9ed.mockapi.io/items')
-            .then((res) => setItems(res.data));
+        async function fetchData() {
+            const cartResponse = await axios.get(
+                'https://63d9058a5a330a6ae172e9ed.mockapi.io/cart'
+            );
 
-        axios
-            .get('https://63d9058a5a330a6ae172e9ed.mockapi.io/cart')
-            .then((res) => setCartItems(res.data));
+            const itemsResponse = await axios.get(
+                'https://63d9058a5a330a6ae172e9ed.mockapi.io/items'
+            );
+
+            setIsLoading(false);
+
+            setCartItems(cartResponse.data);
+            setItems(itemsResponse.data);
+        }
+
+        fetchData();
     }, []);
 
-    const onAddToCart = async (obj, isAdded) => {
-        console.log(obj);
+    const onAddToCart = async (obj) => {
         try {
-            const { data } = await axios.post(
-                'https://63d9058a5a330a6ae172e9ed.mockapi.io/cart',
-                obj
-            );
-            setCartItems((prev) => [...prev, data]);
+            if (cartItems.find((item) => item.id === obj.id)) {
+                await axios.delete(
+                    `https://63d9058a5a330a6ae172e9ed.mockapi.io/cart/${obj.id}`
+                );
+                setCartItems((prev) =>
+                    prev.filter((item) => item.id !== obj.id)
+                );
+            } else {
+                const { data } = await axios.post(
+                    'https://63d9058a5a330a6ae172e9ed.mockapi.io/cart',
+                    obj
+                );
+                setCartItems((prev) => [...prev, data]);
+            }
         } catch (error) {
             alert('Не удалось добавить товар в корзину');
         }
@@ -67,11 +85,13 @@ function App() {
 
             <Route path="/" exact>
                 <Home
+                    cartItems={cartItems}
                     items={items}
                     searchValue={searchValue}
                     onAddToCart={onAddToCart}
                     onChangeSearchInput={onChangeSearchInput}
                     onAddToFavorite={onAddToFavorite}
+                    isLoading={isLoading}
                 />
             </Route>
             <Route path="/favorites" exact>
