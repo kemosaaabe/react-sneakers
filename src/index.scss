@@ -253,8 +253,9 @@ body {
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 
-    &:hover {
-        background-color: lighten(#9dd558, 5%);
+    &:disabled {
+        background-color: #bebebe;
+        cursor: default;
     }
 
     &:active {

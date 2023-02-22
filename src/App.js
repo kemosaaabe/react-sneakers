@@ -80,7 +80,15 @@ function App() {
 
     return (
         <AppContext.Provider
-            value={{ items, cartItems, favorites, isItemAdded }}
+            value={{
+                items,
+                cartItems,
+                setCartItems,
+                favorites,
+                isItemAdded,
+                onAddToFavorite,
+                setCartOpened,
+            }}
         >
             <div className="wrapper">
                 {cartOpened && (
@@ -104,7 +112,7 @@ function App() {
                     />
                 </Route>
                 <Route path="/favorites" exact>
-                    <Favorites onAddToFavorite={onAddToFavorite} />
+                    <Favorites />
                 </Route>
             </div>
         </AppContext.Provider>
