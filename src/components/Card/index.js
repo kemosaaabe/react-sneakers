@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 import styles from './Card.module.scss';
@@ -11,19 +10,17 @@ function Card({
     onFavorite,
     onPlus,
     id,
-    favorited = false,
     loading = false,
 }) {
-    const { isItemAdded } = React.useContext(AppContext);
-    const [isFavorite, setIsFavorite] = useState(favorited);
+    const { isItemAdded, isItemFavorite } = React.useContext(AppContext);
+    const obj = { title, price, imageUrl, id, parentId: id };
 
     const onClickPlus = () => {
-        onPlus({ title, price, imageUrl, id });
+        onPlus(obj);
     };
 
     const onClickFavorite = () => {
-        setIsFavorite(!isFavorite);
-        onFavorite({ title, price, imageUrl, id });
+        onFavorite(obj);
     };
 
     return (
@@ -53,15 +50,17 @@ function Card({
             ) : (
                 <>
                     <div className={styles.cardFavorite}>
-                        <img
-                            src={
-                                isFavorite
-                                    ? '/img/heart-liked.svg'
-                                    : '/img/heart-unliked.svg'
-                            }
-                            alt="Unliked"
-                            onClick={onClickFavorite}
-                        />
+                        {onFavorite && (
+                            <img
+                                src={
+                                    isItemFavorite(id)
+                                        ? '/img/heart-liked.svg'
+                                        : '/img/heart-unliked.svg'
+                                }
+                                alt="Unliked"
+                                onClick={onClickFavorite}
+                            />
+                        )}
                     </div>
                     <img
                         className={styles.cardImage}
@@ -76,18 +75,20 @@ function Card({
                             <span>Цена:</span>
                             <b>{price} руб.</b>
                         </div>
-                        <img
-                            className={styles.cardButton}
-                            width={32}
-                            height={32}
-                            src={
-                                isItemAdded(id)
-                                    ? '/img/btn-checked.svg'
-                                    : '/img/btn-plus.svg'
-                            }
-                            alt="Plus"
-                            onClick={onClickPlus}
-                        />
+                        {onPlus && (
+                            <img
+                                className={styles.cardButton}
+                                width={32}
+                                height={32}
+                                src={
+                                    isItemAdded(id)
+                                        ? '/img/btn-checked.svg'
+                                        : '/img/btn-plus.svg'
+                                }
+                                alt="Plus"
+                                onClick={onClickPlus}
+                            />
+                        )}
                     </div>
                 </>
             )}
