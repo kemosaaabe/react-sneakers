@@ -7,7 +7,7 @@ function Header(props) {
 
     return (
         <header className="header">
-            <Link to="/" className="headerLogoLink">
+            <Link to="" className="headerLogoLink">
                 <div className="headerLeft">
                     <img
                         width={40}
@@ -32,7 +32,7 @@ function Header(props) {
                     <span>{totalPrice} руб.</span>
                 </li>
                 <li>
-                    <Link to="/favorites">
+                    <Link to="favorites">
                         <img
                             src="img/favorite.svg"
                             alt="Favorite"
@@ -42,7 +42,7 @@ function Header(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/orders">
+                    <Link to="orders">
                         <img
                             width={18}
                             height={18}
