@@ -12,7 +12,7 @@ function Header(props) {
                     <img
                         width={40}
                         height={40}
-                        src="/img/logo.png"
+                        src="img/logo.png"
                         alt="Logo"
                     />
                     <div className="headerTitle">
@@ -26,7 +26,7 @@ function Header(props) {
                     <img
                         width={18}
                         height={18}
-                        src="/img/cart.svg"
+                        src="img/cart.svg"
                         alt="Cart"
                     />
                     <span>{totalPrice} руб.</span>
@@ -34,7 +34,7 @@ function Header(props) {
                 <li>
                     <Link to="/favorites">
                         <img
-                            src="/img/favorite.svg"
+                            src="img/favorite.svg"
                             alt="Favorite"
                             width={18}
                             height={18}
@@ -46,7 +46,7 @@ function Header(props) {
                         <img
                             width={18}
                             height={18}
-                            src="/img/user.svg"
+                            src="img/user.svg"
                             alt="User"
                         />
                     </Link>

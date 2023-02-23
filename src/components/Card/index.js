@@ -54,8 +54,8 @@ function Card({
                             <img
                                 src={
                                     isItemFavorite(id)
-                                        ? '/img/heart-liked.svg'
-                                        : '/img/heart-unliked.svg'
+                                        ? 'img/heart-liked.svg'
+                                        : 'img/heart-unliked.svg'
                                 }
                                 alt="Unliked"
                                 onClick={onClickFavorite}
@@ -82,8 +82,8 @@ function Card({
                                 height={32}
                                 src={
                                     isItemAdded(id)
-                                        ? '/img/btn-checked.svg'
-                                        : '/img/btn-plus.svg'
+                                        ? 'img/btn-checked.svg'
+                                        : 'img/btn-plus.svg'
                                 }
                                 alt="Plus"
                                 onClick={onClickPlus}
